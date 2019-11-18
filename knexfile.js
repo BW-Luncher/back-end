@@ -7,13 +7,11 @@ module.exports = {
     client: 'pg',
     useNullAsDefault: true,
     connection: {
-      //DB_DEV_DATABASE = apiluncher
-      //DB_DEV_USER = gavindreyer
       database: process.env.DB_DEV_DATABASE,
       user: process.env.DB_DEV_USER
     },
     migrations: {
-      diretcory: './data/migrations'
+      directory: './data/migrations'
     },
     seeds: {
       directory: './data/seeds'
