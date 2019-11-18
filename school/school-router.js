@@ -24,6 +24,16 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+
+	const body = req.body;
+ 	 if (
+		!body.school ||
+		!body.address ||
+		!body.funds_needed ||
+		!body.goal
+	){
+		res.status(400).json({message: 'please add missing required fields'})
+	}
 	Schools.add(req.body)
 		.then(add => {
 			res.status(201).json(add);
@@ -61,5 +71,27 @@ router.put('/:id', (req, res) => {
 			res.status(500).json({ error: 'Error when updating schools' });
 		});
 });
+
+router.delete('/:id', (req,res)=> {
+
+	const id =req.params.id
+	Schools.remove(id)
+	.then(item => {
+		if(item === 0){
+			res.status(404).json({message: 'ID not found'})
+		} else {
+			Schools.find(req.schools.id) 
+			.then(response => {
+				res.status(200).json( response, ` school with ${id} has been removed`)
+			})
+		}
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(500).json({ error: 'Error when deleting schools' });
+	});
+})
+
+
 
 module.exports = router;
