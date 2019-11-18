@@ -31,34 +31,13 @@ function add(item) {
 		});
 }
 
-
-// function findById(id){
-//     return db('schools')
-//     .where({id})
-//     .first()
-// }
-
-// function update(changes,id) {
-//     return db('schools')
-//     .where({id: id})
-// 	.update(changes, 'id')
-//     .then(()=> findById(id))
-// }
-
-
-function update(body,id){
+function update(body, id) {
 	return db('schools')
-	.where({id})
-	.update(body ,'id')
-	.then(ids => {
-		// console.log(ids
-		const [id] = ids;
-		return find(id);
-	})
-}
-
-function remove(id){
-    return db('schemes')
-    .del()
-    .where({id})
+		.where({ id })
+		.update(body, 'id')
+		.then(ids => {
+			return db('schools').where({ id });
+			// const [id] = ids;
+			// return find(id);
+		});
 }
