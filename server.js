@@ -5,35 +5,17 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const db = require('./data/dbConfig');
+const authRouter = require('./auth/auth-router');
 
 server.use(helmet());
 server.use(cors());
 server.use(morgan());
 server.use(express.json());
 
-server.get('/', (req, res) => {
-	res.status(200).json({ message: 'hello world' });
-});
+server.use('/api/auth', authRouter);
 
-server.get('/users', (req, res) => {
-	db('users')
-		.then(response => {
-			res.status(200).json(response);
-		})
-		.catch(response => {
-			res.status(500).json({ message: response });
-		});
-});
-
-server.post('/', (req, res) => {
-	db('users')
-		.insert(req.body)
-		.then(response => {
-			res.status(200).json(req.body);
-		})
-		.catch(response => {
-			res.status(500).json({ message: 'err' });
-		});
-});
+// server.get('/', (req, res) => {
+// 	res.status(200).json({ message: 'hello world' });
+// });
 
 module.exports = server;
