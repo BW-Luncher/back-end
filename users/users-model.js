@@ -6,6 +6,7 @@ module.exports = {
     findBy,
   };
   
+  
   function find(id) {
 	if (id) {
         return db('users')
@@ -22,7 +23,7 @@ module.exports = {
     .where(body);
   }
   
-  
+
   function add(item){
     return db('users')
     .insert(item, "id")
