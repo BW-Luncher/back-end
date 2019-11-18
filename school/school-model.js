@@ -30,14 +30,13 @@ function add(item) {
 		});
 }
 
-
-function update(body,id){
+function update(body, id) {
 	return db('schools')
-	.where({id})
-	.update(body ,'id')
-	.then(ids => {
-		// console.log(ids
-		const [id] = ids;
-		return find(id);
-	})
+		.where({ id })
+		.update(body, 'id')
+		.then(ids => {
+			return db('schools').where({ id });
+			// const [id] = ids;
+			// return find(id);
+		});
 }
