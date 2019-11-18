@@ -77,10 +77,10 @@ router.delete('/:id', (req,res)=> {
 	const id =req.params.id
 	Schools.remove(id)
 	.then(item => {
-		if(item === 0){
+		if(!item){
 			res.status(404).json({message: 'ID not found'})
 		} else {
-			Schools.find(req.schools.id) 
+			Schools.find(id) 
 			.then(response => {
 				res.status(200).json( response, ` school with ${id} has been removed`)
 			})
