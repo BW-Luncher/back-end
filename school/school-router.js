@@ -41,14 +41,14 @@ router.put('/:id', (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
 	if (!id) {
-		res.status(404).json({ message: 'please add missing required fields' });
+		res.status(404).json({ message: 'could not find school with given id ' });
 	} else if (
 		!body.school ||
 		!body.address ||
 		!body.funds_needed ||
 		!body.goal
 	) {
-		res.status(400).json({ message: 'could not find school with given id ' });
+		res.status(400).json({ message: 'please add required missing fields ' });
 	}
 	Schools.update(body, id)
 		.then(item => {
