@@ -4,7 +4,8 @@ module.exports = {
 	add,
 	find,
 	findBy,
-	update
+	update,
+	// findById,
 };
 
 function find(id) {
@@ -31,6 +32,20 @@ function add(item) {
 }
 
 
+// function findById(id){
+//     return db('schools')
+//     .where({id})
+//     .first()
+// }
+
+// function update(changes,id) {
+//     return db('schools')
+//     .where({id: id})
+// 	.update(changes, 'id')
+//     .then(()=> findById(id))
+// }
+
+
 function update(body,id){
 	return db('schools')
 	.where({id})
@@ -40,4 +55,10 @@ function update(body,id){
 		const [id] = ids;
 		return find(id);
 	})
+}
+
+function remove(id){
+    return db('schemes')
+    .del()
+    .where({id})
 }
