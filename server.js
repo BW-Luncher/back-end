@@ -15,6 +15,16 @@ server.get('/', (req, res) => {
 	res.status(200).json({ message: 'hello world' });
 });
 
+server.get('/users', (req, res) => {
+	db('users')
+		.then(response => {
+			res.status(200).jaon(response);
+		})
+		.catch(response => {
+			res.status(500).json({ message: 'err' });
+		});
+});
+
 server.post('/', (req, res) => {
 	db('users')
 		.insert(req.body)
