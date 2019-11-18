@@ -18,10 +18,10 @@ server.get('/', (req, res) => {
 server.get('/users', (req, res) => {
 	db('users')
 		.then(response => {
-			res.status(200).jaon(response);
+			res.status(200).json(response);
 		})
 		.catch(response => {
-			res.status(500).json({ message: 'err' });
+			res.status(500).json({ message: response });
 		});
 });
 
