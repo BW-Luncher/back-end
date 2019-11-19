@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Schools = require('./school-model');
+const authenticate = require('../auth/restricted-middleware');
 
 // GET - all users
 router.get('/', async (req, res) => {
@@ -23,7 +24,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/', (req, res) => {
+router.post('/',authenticate, (req, res) => {
 	const body = req.body;
 	if (!body.school || !body.address || !body.funds_needed || !body.goal) {
 		res.status(400).json({ message: 'please add missing required fields' });
@@ -37,7 +38,7 @@ router.post('/', (req, res) => {
 		});
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id',authenticate, (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
 	if (!id) {
@@ -65,7 +66,7 @@ router.put('/:id', (req, res) => {
 		});
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',authenticate, (req, res) => {
 	const id = req.params.id;
 	Schools.remove(id)
 		.then(item => {
