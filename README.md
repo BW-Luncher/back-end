@@ -56,13 +56,13 @@ POST /auth/login
 | name            | type    | description                                           |
 | --------------- | ------- | ----------------------------------------------------- |
 | id              | integer | school id                                             |
-| school          | string  | school name _required_                                |
-| school_insignia | string  | photo of item (cannot be longer than 1000 characters) |
+| school          | text    | school name _required_                                |
+| school_insignia | text    | photo of item (cannot be longer than 1000 characters) |
 | address         | text    | address of school _required_                          |
-| email           | string  | email of school _required_                            |
+| email           | text    | email of school                                       |
 | funds_needed    | integer | funds needed for school _required_                    |
 | funds_given     | integer | funds donated to school                               |
-| goal            | integer | Overall donation goal for the the school              |
+| goal            | integer | Overall donation goal for the the school _required_   |
 
 ## GET school object
 
@@ -177,5 +177,46 @@ PUT schools/:id
     "funds_given": 1000,
     "goal": 10000
 }
+
+```
+
+---
+
+## DELETE School
+
+```
+
+DELETE schools/:id
+
+```
+
+## Response
+
+- An array of all the schools still in the Database
+
+```
+
+[
+  {
+    "id": 2,
+    "school": "George Washington Highschool",
+    "school_insignia": "https://images.unsplash.com/photo-1566673242574-eddd38f7277f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    "address": "123 George Ave",
+    "email": "GW@gmail.com",
+    "funds_needed": 5000,
+    "funds_given": 2000,
+    "goal": 7000
+  },
+  {
+    "id": 3,
+    "school": "George Washington Highschool",
+    "school_insignia": "https://images.unsplash.com/photo-1566673242574-eddd38f7277f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    "address": "123 George Ave",
+    "email": "GW@gmail.com",
+    "funds_needed": 5000,
+    "funds_given": 2000,
+    "goal": 7000
+  }
+]
 
 ```
