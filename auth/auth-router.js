@@ -6,16 +6,6 @@ const router = express.Router();
 
 const Users = require('./auth-model');
 
-// router.get('/users', (req, res) => {
-// 	Users.find()
-// 		.then(response => {
-// 			res.status(200).json(response);
-// 		})
-// 		.catch(response => {
-// 			res.status(500).json({ message: response });
-// 		});
-// });
-
 router.post('/register', (req, res) => {
 	let user = req.body;
 

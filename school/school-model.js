@@ -39,8 +39,6 @@ function update(body, id) {
 		.update(body, 'id')
 		.then(ids => {
 			return db('schools').where({ id });
-			// const [id] = ids;
-			// return find(id);
 		});
 }
 
