@@ -14,7 +14,7 @@ server.use(morgan());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/schools', authenticate, schoolRouter);
+server.use('/api/schools', schoolRouter);
 
 // server.get('/', (req, res) => {
 // 	res.status(200).json({ message: 'hello world' });
