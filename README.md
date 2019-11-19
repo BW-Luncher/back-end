@@ -1,24 +1,23 @@
 # back-end
 
-
-
 ### BaseURL: lambdalunches.herokuapp.com/api
+
 ---
 
 # **Authentication**
 
 ## Register User
+
 ```
 POST /auth/register
 ```
-| name     	| type   	| description                	|   	|   	|
-|----------	|--------	|----------------------------	|---	|---	|
-| username 	| string 	| users name *required       	|   	|   	|
-| password 	| string 	| users password *required   	|   	|   	|
 
+| name     | type   | description               |     |     |
+| -------- | ------ | ------------------------- | --- | --- |
+| username | string | users name \*required     |     |     |
+| password | string | users password \*required |     |     |
 
-
-### response 
+### response
 
 ```
 {
@@ -26,18 +25,21 @@ POST /auth/register
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...etc."
 }
 ```
+
 ---
+
 ## Login User
+
 ```
 POST /auth/login
 ```
 
-| name     	| type   	| description              	|   	|   	|
-|----------	|--------	|--------------------------	|---	|---	|
-| username 	| string 	| users name *required     	|   	|   	|
-| password 	| string 	| users password *required 	|   	|   	|
+| name     | type   | description               |     |     |
+| -------- | ------ | ------------------------- | --- | --- |
+| username | string | users name \*required     |     |     |
+| password | string | users password \*required |     |     |
 
-### response 
+### response
 
 ```
 {
@@ -46,28 +48,29 @@ POST /auth/login
 }
 
 ```
-schools object layout
----
- 
+
+## schools object layout
+
 # **schools**
 
-| name        	| type    	| description                                             	|
-|-------------	|---------	|---------------------------------------------------------	|
-| id          	| integer 	| school id    	|
-| school      	| string  	|  school name *required*	|
-| school_insignia | string | photo of item (cannot be longer than 1000 characters)   	|
-| address	| text  | address of school *required*  	|
-| email   | string 	| email of school *required*   |
-| funds_needed  | integer 	| funds needed for school *required*     	|
-| funds_given   | integer 	| funds donated to school  	|
-| goal 	| integer 	| Overall donation goal for the the school     	|
+| name            | type    | description                                           |
+| --------------- | ------- | ----------------------------------------------------- |
+| id              | integer | school id                                             |
+| school          | string  | school name _required_                                |
+| school_insignia | string  | photo of item (cannot be longer than 1000 characters) |
+| address         | text    | address of school _required_                          |
+| email           | string  | email of school _required_                            |
+| funds_needed    | integer | funds needed for school _required_                    |
+| funds_given     | integer | funds donated to school                               |
+| goal            | integer | Overall donation goal for the the school              |
 
 ## GET school object
 
 ```
 Get  /schools/
 ```
-### response 
+
+### response
 
 ```
 [
@@ -104,6 +107,7 @@ Get  /schools/
 ]
 
 ```
+
 ---
 
 ## GET school by ID
@@ -111,7 +115,8 @@ Get  /schools/
 ```
 GET /schools/:id
 ```
-### response 
+
+### response
 
 ```
 {
@@ -125,14 +130,16 @@ GET /schools/:id
     "goal": 10000
 }
 ```
+
 ---
+
 ## POST school
 
 ```
-POST schools/:id
+POST schools/
 ```
 
-### response 
+### response
 
 ```
 {
@@ -146,4 +153,29 @@ POST schools/:id
   "goal": 10000
 }
 ```
+
 ---
+
+## PUT school
+
+```
+PUT schools/:id
+
+```
+
+## response
+
+```
+
+{
+    "id": 3,
+    "school": "George Washington Highschool",
+    "school_insignia": "http//schools.com",
+    "address": "123 school dr",
+    "email": "this@gmail.com",
+    "funds_needed": 9000,
+    "funds_given": 1000,
+    "goal": 10000
+}
+
+```

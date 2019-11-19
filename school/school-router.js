@@ -17,14 +17,18 @@ router.get('/', async (req, res) => {
 router.get('/:id', (req, res) => {
 	Schools.find(req.params.id)
 		.then(schools => {
-			res.status(200).json(schools);
+			if (!schools) {
+				res.status(400).json({ message: 'Cannot find ID of school' });
+			} else {
+				res.status(200).json(schools);
+			}
 		})
 		.catch(err => {
 			res.status(500).json({ error: 'Error when retrieving schools' });
 		});
 });
 
-router.post('/',authenticate, (req, res) => {
+router.post('/', authenticate, (req, res) => {
 	const body = req.body;
 	if (!body.school || !body.address || !body.funds_needed || !body.goal) {
 		res.status(400).json({ message: 'please add missing required fields' });
@@ -38,7 +42,7 @@ router.post('/',authenticate, (req, res) => {
 		});
 });
 
-router.put('/:id',authenticate, (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
 	if (!id) {
@@ -56,9 +60,10 @@ router.put('/:id',authenticate, (req, res) => {
 			console.log(item);
 			if (item.length === 0) {
 				res
-					.status(400).json({ message: 'could not find school with given id ' });
+					.status(400)
+					.json({ message: 'could not find school with given id ' });
 			} else {
-				res.status(200).json(item);
+				res.status(200).json(item[0]);
 			}
 		})
 		.catch(err => {
@@ -66,7 +71,7 @@ router.put('/:id',authenticate, (req, res) => {
 		});
 });
 
-router.delete('/:id',authenticate, (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
 	const id = req.params.id;
 	Schools.remove(id)
 		.then(item => {
