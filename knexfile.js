@@ -51,14 +51,19 @@ module.exports = {
 	testing: {
 		client: 'pg',
 		connection: {
-			filename: 'postgres://localhost/testing'
+			connection:{
+				database: process.env.DB_DEV_DATABASE,
+				user: process.env.DB_DEV_USER
+			}
 		},
 		useNullAsDefault: true,
 		migrations: {
-			directory: './data/migrations'
+			directory: './data/migrations/'
 		},
 		seeds: {
-			directory: './data/seeds'
-		}
+			directory: './data/seeds/'
+		},
+	
+		
 	}
 };
