@@ -55,8 +55,7 @@ router.put('/:id', (req, res) => {
 			console.log(item);
 			if (item.length === 0) {
 				res
-					.status(400)
-					.json({ message: 'could not find school with given id ' });
+					.status(400).json({ message: 'could not find school with given id ' });
 			} else {
 				res.status(200).json(item);
 			}
