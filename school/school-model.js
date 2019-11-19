@@ -5,7 +5,7 @@ module.exports = {
 	find,
 	findBy,
 	update,
-	remove, 
+	remove
 	// findById,
 };
 
@@ -18,7 +18,6 @@ function find(id) {
 		return db('schools');
 	}
 }
-
 
 function findBy(body) {
 	return db('users').where(body);
@@ -42,8 +41,8 @@ function update(body, id) {
 		});
 }
 
-function remove(id){
-    return db('schools')
-    .del()
-    .where({id})
+function remove(id) {
+	return db('schools')
+		.del()
+		.where({ id });
 }
