@@ -19,6 +19,7 @@ function find(id) {
 	}
 }
 
+
 function findBy(body) {
 	return db('users').where(body);
 }
