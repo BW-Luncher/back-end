@@ -95,9 +95,7 @@ router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
 
 function roleCheck(role) {
 	return function(req, res, next) {
-		console.log(req);
-		console.log(req.decodedJwt);
-		if (role === req.decodedJwt.role) {
+		if (role === res.decodedToken.role) {
 			next();
 		} else {
 			res.status(403).json({ message: "You aren't allowed to do that" });
