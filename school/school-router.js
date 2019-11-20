@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Schools = require('./school-model');
 const authenticate = require('../auth/restricted-middleware');
+const jwt = require('jsonwebtoken')
 
 // GET - all users
 router.get('/', async (req, res) => {
@@ -83,7 +84,7 @@ router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
 						res.status(200).json(response);
 					})
 					.catch(err => {
-						console.log(err);
+						// console.log(err);
 						res.status(500).json({ error: 'Error when deleting schools' });
 					});
 			}
@@ -93,10 +94,10 @@ router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
 		});
 });
 
-function roleCheck(role) {
+function roleCheck(role,decodedJwt) {
 	return function(req, res, next) {
+		// console.log(req);
 		console.log(req);
-		console.log(req.decodedJwt);
 		if (role === req.decodedJwt.role) {
 			next();
 		} else {
