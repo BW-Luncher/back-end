@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
 		.first()
 		.then(user => {
 			if (user && bcrypt.compareSync(password, user.password)) {
-				const token = getJwtToken(user.username, user.password);
+				const token = getJwtToken(user.username, user.password, user.role);
 
 				res.status(200).json({ token, message: `Welcome ${user.username}` });
 			} else {
@@ -41,10 +41,11 @@ router.post('/login', (req, res) => {
 		});
 });
 
-function getJwtToken(username, password) {
+function getJwtToken(username, password, role) {
 	const payload = {
 		username,
-		password
+		password,
+		role
 	};
 
 	const secret = process.env.JWT_SECRET || 'is it secret, is it safe?';

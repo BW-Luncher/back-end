@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/', authenticate, (req, res) => {
+router.post('/', authenticate, roleCheck('admin'), (req, res) => {
 	const body = req.body;
 	if (!body.school || !body.address || !body.funds_needed || !body.goal) {
 		res.status(400).json({ message: 'please add missing required fields' });
@@ -42,7 +42,7 @@ router.post('/', authenticate, (req, res) => {
 		});
 });
 
-router.put('/:id', authenticate, (req, res) => {
+router.put('/:id', authenticate, roleCheck('admin'), (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
 	if (!id) {
@@ -71,7 +71,7 @@ router.put('/:id', authenticate, (req, res) => {
 		});
 });
 
-router.delete('/:id', authenticate, (req, res) => {
+router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
 	const id = req.params.id;
 	Schools.remove(id)
 		.then(item => {
@@ -92,5 +92,17 @@ router.delete('/:id', authenticate, (req, res) => {
 			res.status(500).json({ error: 'Error when deleting schools' });
 		});
 });
+
+function roleCheck(role) {
+	return function(req, res, next) {
+		console.log(req);
+		console.log(req.decodedJwt);
+		if (role === req.decodedJwt.role) {
+			next();
+		} else {
+			res.status(403).json({ message: "You aren't allowed to do that" });
+		}
+	};
+}
 
 module.exports = router;
