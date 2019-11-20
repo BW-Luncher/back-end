@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
 
 	Users.add(user)
 		.then(response => {
-			res.status(200).json({ message: 'successfully registered' });
+			res.status(201).json({ message: 'successfully registered' });
 		})
 		.catch(response => {
 			res.status(500).json({ message: 'error when registering' });
@@ -25,7 +25,6 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
 	let { username, password } = req.body;
 
-	console.log(username);
 	Users.find({ username })
 		.first()
 		.then(user => {
