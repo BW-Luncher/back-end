@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Schools = require('./school-model');
 const authenticate = require('../auth/restricted-middleware');
-const jwt = require('jsonwebtoken')
+
 
 // GET - all users
 router.get('/', async (req, res) => {
@@ -96,9 +96,7 @@ router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
 
 function roleCheck(role,decodedJwt) {
 	return function(req, res, next) {
-		// console.log(req);
-		console.log(req);
-		if (role === req.decodedJwt.role) {
+		if (role === res.decodedToken.role) {
 			next();
 		} else {
 			res.status(403).json({ message: "You aren't allowed to do that" });
