@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/', authenticate, roleCheck('admin'), (req, res) => {
+router.post('/', authenticate, (req, res) => {
 	const body = req.body;
 	if (!body.school || !body.address || !body.funds_needed || !body.goal) {
 		res.status(400).json({ message: 'please add missing required fields' });
@@ -42,7 +42,7 @@ router.post('/', authenticate, roleCheck('admin'), (req, res) => {
 		});
 });
 
-router.put('/:id', authenticate, roleCheck('admin'), (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
 	if (!id) {
@@ -71,7 +71,7 @@ router.put('/:id', authenticate, roleCheck('admin'), (req, res) => {
 		});
 });
 
-router.delete('/:id', authenticate, roleCheck('admin'), (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
 	const id = req.params.id;
 	Schools.remove(id)
 		.then(item => {
