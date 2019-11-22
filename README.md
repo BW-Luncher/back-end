@@ -1,6 +1,6 @@
 # back-end
 
-### BaseURL: lambdalunches.herokuapp.com/api
+### BaseURL: lambdaluncher.herokuapp.com/api
 
 ---
 
